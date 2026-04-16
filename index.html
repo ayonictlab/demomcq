@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔥 হ্যাকার টাইপ MCQ 🔥 - কম্পিউটারের মৌলিক ধারণা</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+
+    :root {
+      --primary: #00e6b8;
+    }
+
+    body {
+      font-family: 'Tiro Bangla', 'Noto Sans Bengali', sans-serif;
+      background: linear-gradient(135deg, #0a0a1f, #1a1a3e, #2a2a5a);
+      color: #e0ffeb;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    /* Sticky Header Section */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(15, 15, 40, 0.98);
+      border-bottom: 3px solid var(--primary);
+      box-shadow: 0 4px 15px rgba(0, 230, 184, 0.3);
+    }
+
+    .header {
+      background: linear-gradient(to right, #1a1a3e, #2a2a5a);
+      padding: 20px 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: var(--primary);
+      text-shadow: 0 0 20px var(--primary);
+      font-size: 2.4rem;
+    }
+
+    .progress-container {
+      height: 8px;
+      background: #16213e;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, var(--primary), #00ffcc);
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .test-info {
+      padding: 16px 25px;
+      background: #16213e;
+      font-size: 1.15rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .timer {
+      font-weight: bold;
+      color: #ffd700;
+      font-size: 1.25rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: rgba(15, 15, 40, 0.96);
+      border: 2px solid var(--primary);
+      border-radius: 0 0 22px 22px;
+      box-shadow: 0 0 45px rgba(0, 230, 184, 0.4);
+      overflow: hidden;
+    }
+
+    .question {
+      padding: 32px 30px;
+      border-bottom: 1px solid #334466;
+      transition: all 0.3s;
+    }
+
+    .question:hover {
+      background: rgba(0, 230, 184, 0.07);
+    }
+
+    .q-number {
+      font-size: 1.65rem;           /* Question text slightly larger */
+      color: var(--primary);
+      margin-bottom: 18px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .options label {
+      display: flex;
+      align-items: center;
+      padding: 15px 22px;
+      margin: 12px 0;
+      background: #1e2a44;
+      border: 2px solid #334466;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.05rem;           /* Options text slightly smaller */
+      line-height: 1.45;
+    }
+
+    .options label:hover {
+      border-color: var(--primary);
+      transform: translateX(10px);
+    }
+
+    /* Selected Option - Green Fill */
+    .options input[type="radio"]:checked ~ label {
+      background: #00c99e !important;
+      border-color: #00e6b8;
+      color: #000;
+      box-shadow: 0 0 18px rgba(0, 230, 184, 0.6);
+    }
+
+    input[type="radio"] {
+      accent-color: var(--primary);
+      width: 22px;
+      height: 22px;
+      margin-right: 15px;
+    }
+
+    .navigation {
+      padding: 20px 30px;
+      background: #16213e;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .nav-btn {
+      width: 42px;
+      height: 42px;
+      border: 2px solid #334466;
+      background: #1e2a44;
+      color: #e0ffeb;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: bold;
+    }
+
+    .nav-btn.answered {
+      background: var(--primary);
+      color: #000;
+      border-color: var(--primary);
+    }
+
+    .submit-btn {
+      display: block;
+      width: 260px;
+      margin: 30px auto;
+      padding: 17px;
+      font-size: 1.4rem;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 0 30px var(--primary);
+      transition: all 0.4s;
+    }
+
+    .submit-btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 40px var(--primary);
+    }
+
+    /* Result Section */
+    #result {
+      display: none;
+      padding: 50px 35px;
+      text-align: center;
+    }
+
+    .score {
+      font-size: 5.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-shadow: 0 0 30px var(--primary);
+    }
+
+    .comment {
+      font-size: 2.2rem;
+      margin: 30px 0;
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    .excellent { color: #00e6b8; }
+    .good { color: #ffdd57; }
+    .practice { color: #ff7777; }
+
+    /* Result colors - Green for correct, Red for incorrect, NO bold */
+    .correct { 
+      color: #00e6b8; 
+      font-weight: 400; 
+    }
+    .wrong { 
+      color: #ff6666; 
+      font-weight: 400; 
+    }
+
+    .quote {
+      font-size: 1.7rem;
+      margin-top: 50px;
+      padding: 28px;
+      border-left: 8px solid var(--primary);
+      background: rgba(0, 230, 184, 0.1);
+      border-radius: 12px;
+    }
+
+    canvas#confetti { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      pointer-events: none; 
+      z-index: 9999; 
+    }
+
+    /* Mobile Responsive - Smaller font + better one-line readability */
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 2.1rem;
+      }
+      .q-number {
+        font-size: 1.55rem;
+      }
+      .options label {
+        font-size: 1.0rem;          /* Smaller on mobile so options stay in one line */
+        padding: 14px 20px;
+      }
+      .question {
+        padding: 28px 22px;
+      }
+      .test-info {
+        font-size: 1.05rem;
+        padding: 14px 20px;
+      }
+      .timer {
+        font-size: 1.15rem;
+      }
+      .submit-btn {
+        width: 220px;
+        font-size: 1.3rem;
+        padding: 15px;
+      }
+      .score {
+        font-size: 4.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header (always visible when scrolling) -->
+  <div class="sticky-header">
+    <div class="header">
+      <h1>🔥 হ্যাকার টাইপ MCQ 🔥</h1>
+      <p style="color:#b0ffdd; margin:8px 0 0 0;">কম্পিউটারের মৌলিক ধারণা - টেস্ট ০১ (২০টি প্রশ্ন)</p>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="test-info">
+      <div><strong>নির্দেশনা:</strong> সঠিক উত্তর নির্বাচন করুন</div>
+      <div class="timer">সময়: <span id="timer">20:00</span></div>
+    </div>
+  </div>
+
+  <div class="container" id="quizContainer">
+    <form id="quizForm"></form>
+    <div class="navigation" id="navigation"></div>
+    <button class="submit-btn" onclick="submitQuiz()">জমা দিন</button>
+  </div>
+
+  <!-- Result -->
+  <div id="result" class="container">
+    <h2 style="color:#00e6b8;">🎯 আপনার ফলাফল</h2>
+    <div class="score" id="scoreDisplay">০/২০</div>
+    <div class="comment" id="comment"></div>
+    <div id="review" style="margin-top:40px; text-align:left;"></div>
+
+    <div class="quote">
+      ধীরে চললেও সমস্যা নেই,<br>কিন্তু থেমে যাওয়া মানেই হার।
+    </div>
+
+    <button class="submit-btn" onclick="location.reload()">আবার টেস্ট দিন</button>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
+  <script>
+    const questions = [
+      { q: "১. কম্পিউটার বলতে কী বোঝায়?", 
+        options: ["ডেটা সংরক্ষণের জন্য ব্যবহৃত যান্ত্রিক যন্ত্র", 
+                  "ইনপুট গ্রহণ করে প্রক্রিয়াজাত করে তথ্য প্রদানকারী ইলেকট্রনিক যন্ত্র", 
+                  "শুধুমাত্র গণনা শেখানোর শিক্ষামূলক যন্ত্র", 
+                  "কেবল আউটপুট প্রদর্শনের যন্ত্র"], 
+        ans: 1 },
+
+      { q: "২. কম্পিউটারের কোন গুণের জন্য এটি খুব দ্রুত হিসাব করতে পারে?", 
+        options: ["নির্ভুলতা", "বিরামহীন কাজ করার ক্ষমতা", "উচ্চ গতিসম্পন্নতা", "বহুমুখী ব্যবহারযোগ্যতা"], 
+        ans: 2 },
+
+      { q: "৩. কম্পিউটার কতটা সঠিক ফলাফল দেয়?", 
+        options: ["৫০ শতাংশ", "৭৫ শতাংশ", "নির্দেশনা সঠিক হলে শতভাগ সঠিক ফলাফল দেয়", "৯০ শতাংশ"], 
+        ans: 2 },
+
+      { q: "৪. কোন বৈশিষ্ট্যের কারণে কম্পিউটার বিরতি ছাড়া দীর্ঘ সময় কাজ করতে পারে?", 
+        options: ["তথ্য সংরক্ষণ ক্ষমতা", "নিরবচ্ছিন্ন কাজ করার সক্ষমতা", "স্বয়ংক্রিয়তা", "বহুমুখীতা"], 
+        ans: 1 },
+
+      { q: "৫. “কম্পিউটারের জনক” নামে কাকে পরিচিত করা হয়?", 
+        options: ["হারমান হোলারিথ", "চার্লস ব্যাবেজ", "গটফ্রিড লিবনিজ", "ব্লেইস প্যাসকেল"], 
+        ans: 1 },
+
+      { q: "৬. প্রথম ইলেকট্রনিক কম্পিউটারের নাম কী?", 
+        options: ["ENIAC", "UNIVAC-I", "হোলারিথ ট্যাবুলেটিং মেশিন", "অ্যানালাইটিক্যাল ইঞ্জিন"], 
+        ans: 0 },
+
+      { q: "৭. প্রথম বাণিজ্যিকভাবে ব্যবহৃত কম্পিউটার কোনটি?", 
+        options: ["ENIAC", "UNIVAC-1", "অ্যানালাইটিক্যাল ইঞ্জিন", "স্টেপড রেকনার"], 
+        ans: 1 },
+
+      { q: "৮. গটফ্রিড লিবনিজের তৈরি গণনাযন্ত্রের নাম কী?", 
+        options: ["অ্যানালাইটিক্যাল ইঞ্জিন", "হোলারিথ ট্যাবুলেটিং মেশিন", "স্টেপড রেকনার", "প্যাসকেলাইন"], 
+        ans: 2 },
+
+      { q: "৯. ১৬৪২ সালে ব্লেইস প্যাসকেল কোন যন্ত্রটি আবিষ্কার করেন?", 
+        options: ["অ্যানালাইটিক্যাল ইঞ্জিন", "প্যাসকেলাইন", "স্টেপড রেকনার", "ENIAC"], 
+        ans: 1 },
+
+      { q: "১০. কম্পিউটারের বহুমুখিতা বলতে কী বোঝানো হয়?", 
+        options: ["এটি শুধুমাত্র শিক্ষাক্ষেত্রে ব্যবহৃত হয়", 
+                  "বিভিন্ন ক্ষেত্রে ব্যবহারযোগ্য হওয়া (যেমন: শিক্ষা, চিকিৎসা, ব্যবসা)", 
+                  "শুধু গণনার কাজে ব্যবহৃত হয়", 
+                  "শুধুমাত্র ডেটা সংরক্ষণ করে"], 
+        ans: 1 },
+
+      { q: "১১. কম্পিউটারের মূল অংশ কয়টি?", 
+        options: ["২টি", "৩টি", "৪টি", "৫টি"], 
+        ans: 3 },
+
+      { q: "১২. CPU এর পূর্ণরূপ কী?", 
+        options: ["Central Processing Unit", "Central Power Unit", "Computer Processing Unit", "Control Processing Unit"], 
+        ans: 0 },
+
+      { q: "১৩. RAM কী ধরনের মেমরি?", 
+        options: ["স্থায়ী মেমরি", "অস্থায়ী মেমরি", "শুধু পড়ার মেমরি", "শুধু লেখার মেমরি"], 
+        ans: 1 },
+
+      { q: "১৪. কম্পিউটারের ইনপুট ডিভাইসের উদাহরণ কোনটি?", 
+        options: ["মনিটর", "প্রিন্টার", "কীবোর্ড", "স্পিকার"], 
+        ans: 2 },
+
+      { q: "১৫. হার্ডডিস্ক কোন ধরনের মেমরি?", 
+        options: ["প্রাইমারি", "সেকেন্ডারি", "ক্যাশ", "রেজিস্টার"], 
+        ans: 1 },
+
+      { q: "১৬. কম্পিউটারের প্রথম প্রজন্মে কোন প্রযুক্তি ব্যবহার হয়?", 
+        options: ["ট্রানজিস্টর", "ভ্যাকুয়াম টিউব", "ইন্টিগ্রেটেড সার্কিট", "মাইক্রোপ্রসেসর"], 
+        ans: 1 },
+
+      { q: "১৭. সফটওয়্যার বলতে কী বোঝায়?", 
+        options: ["কম্পিউটারের ভৌত অংশ", "কম্পিউটার চালানোর নির্দেশনা", "কীবোর্ড ও মাউস", "মনিটর"], 
+        ans: 1 },
+
+      { q: "১৮. মাউস কোন ধরনের ডিভাইস?", 
+        options: ["ইনপুট", "আউটপুট", "স্টোরেজ", "প্রসেসিং"], 
+        ans: 0 },
+
+      { q: "১৯. বাইনারি সংখ্যা পদ্ধতিতে কয়টি অঙ্ক ব্যবহার হয়?", 
+        options: ["২টি (০ ও ১)", "১০টি (০-৯)", "১৬টি", "৮টি"], 
+        ans: 0 },
+
+      { q: "২০. অপারেটিং সিস্টেমের উদাহরণ কোনটি?", 
+        options: ["MS Word", "Windows", "Google Chrome", "Adobe Photoshop"], 
+        ans: 1 }
+    ];
+
+    let timeLeft = 20 * 60;
+    let timerInterval;
+    let answered = new Array(questions.length).fill(false);
+
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        const min = Math.floor(timeLeft / 60);
+        const sec = timeLeft % 60;
+        document.getElementById('timer').textContent = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          submitQuiz();
+        }
+      }, 1000);
+    }
+
+    function renderQuestions() {
+      const form = document.getElementById('quizForm');
+      let html = '';
+      let navHTML = '';
+
+      questions.forEach((q, index) => {
+        html += `<div class="question" id="q${index}">
+          <div class="q-number">${q.q}</div>
+          <div class="options">`;
+        
+        q.options.forEach((opt, i) => {
+          html += `
+            <label onclick="markAnswered(${index})">
+              <input type="radio" name="q${index}" value="${i}">
+              <span>${i + 1}. ${opt}</span>
+            </label>`;
+        });
+        html += `</div></div>`;
+
+        navHTML += `<div class="nav-btn" id="nav${index}" onclick="goToQuestion(${index})">${index + 1}</div>`;
+      });
+
+      form.innerHTML = html;
+      document.getElementById('navigation').innerHTML = navHTML;
+    }
+
+    function markAnswered(index) {
+      answered[index] = true;
+      document.getElementById(`nav${index}`).classList.add('answered');
+      updateProgress();
+    }
+
+    function goToQuestion(index) {
+      document.getElementById(`q${index}`).scrollIntoView({ behavior: "smooth" });
+    }
+
+    function updateProgress() {
+      const answeredCount = answered.filter(a => a).length;
+      const percent = Math.round((answeredCount / questions.length) * 100);
+      document.getElementById('progressBar').style.width = percent + '%';
+    }
+
+    function submitQuiz() {
+      clearInterval(timerInterval);
+      let score = 0;
+      let reviewHTML = '<h3 style="color:#00e6b8; text-align:center; margin:30px 0 20px;">📋 প্রশ্নসমূহের রিভিউ</h3>';
+
+      questions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        const userAns = selected ? parseInt(selected.value) : -1;
+
+        reviewHTML += `<div class="question" style="border:1px solid #334466; margin-bottom:22px; padding:22px; border-radius:14px;">
+          <strong>${q.q}</strong><br><br>`;
+
+        if (userAns === q.ans) {
+          score++;
+          reviewHTML += `<span class="correct">✓ সঠিক উত্তর: ${q.ans + 1}. ${q.options[q.ans]}</span>`;
+        } else {
+          reviewHTML += `<span class="wrong">✗ আপনার উত্তর: ${userAns >= 0 ? (userAns + 1) + ". " + q.options[userAns] : "উত্তর দেননি"}</span><br>`;
+          reviewHTML += `<span class="correct">✓ সঠিক উত্তর: ${q.ans + 1}. ${q.options[q.ans]}</span>`;
+        }
+        reviewHTML += `</div>`;
+      });
+
+      const percentage = Math.round((score / questions.length) * 100);
+      let commentText = '';
+      let commentClass = '';
+
+      if (percentage >= 80) {
+        commentText = 'অসাধারণ! তুমি একজন প্রকৃত হ্যাকার! 🔥';
+        commentClass = 'excellent';
+        launchConfetti();
+      } else if (percentage >= 60) {
+        commentText = 'খুব ভালো করেছ! আরেকটু অনুশীলন করলেই পারফেক্ট হবে।';
+        commentClass = 'good';
+      } else {
+        commentText = 'আরও অনুশীলন করো। তুমি অবশ্যই উন্নতি করবে!';
+        commentClass = 'practice';
+      }
+
+      document.getElementById('quizContainer').style.display = 'none';
+      const resultDiv = document.getElementById('result');
+      resultDiv.style.display = 'block';
+
+      document.getElementById('scoreDisplay').textContent = `${score}/${questions.length} (${percentage}%)`;
+      document.getElementById('comment').textContent = commentText;
+      document.getElementById('comment').className = `comment ${commentClass}`;
+      document.getElementById('review').innerHTML = reviewHTML;
+    }
+
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const ctx = canvas.getContext('2d');
+      const colors = ['#00e6b8', '#ffd700', '#ff00ff', '#00ffff'];
+      let particles = [];
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height - canvas.height;
+          this.size = Math.random() * 10 + 5;
+          this.speed = Math.random() * 4 + 2;
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+          this.angle = Math.random() * 360;
+        }
+        update() { this.y += this.speed; this.angle += 5; }
+        draw() {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.angle * Math.PI / 180);
+          ctx.fillStyle = this.color;
+          ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+          ctx.restore();
+        }
+      }
+
+      for (let i = 0; i < 150; i++) particles.push(new Particle());
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p, i) => {
+          p.update();
+          p.draw();
+          if (p.y > canvas.height) particles.splice(i, 1);
+        });
+        if (particles.length > 0) requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    window.onload = () => {
+      renderQuestions();
+      startTimer();
+    };
+  </script>
+</body>
+</html>
